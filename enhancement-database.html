@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Databases — Darian Gernand ePortfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">course<span class="dot">·</span>planner</a>
+    <button class="nav-toggle" aria-label="Toggle navigation"><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="code-review.html">Code Review</a></li>
+      <li><a href="enhancement-software.html">Software Design</a></li>
+      <li><a href="enhancement-algorithms.html">Algorithms</a></li>
+      <li><a href="enhancement-database.html" class="active">Database</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Category Three &middot; Milestone Four</span>
+    <h1>Databases</h1>
+    <p class="subhead">A Python &amp; SQLite companion script replacing flat-file CSV storage with a secure relational backend.</p>
+    <div class="tag-row">
+      <span class="outcome-tag">Outcome 4 &middot; Innovative Techniques</span>
+      <span class="outcome-tag">Outcome 5 &middot; Security Mindset</span>
+    </div>
+    <p class="meta-line">Artifact: course_planner.py &middot; Python 3 / sqlite3</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="block">
+    <h2>The Artifact</h2>
+    <p>This enhancement extends the same CoursePlanner project with a standalone Python script that manages the same course data using Python&rsquo;s built-in <code>sqlite3</code> module. In its original form, the application stored all data in a plain-text CSV file re-read on every run, with no schema, no integrity constraints, and no query capability.</p>
+  </section>
+
+  <section class="block">
+    <h2>Why This Enhancement</h2>
+    <p>A flat CSV file works for a small class project but breaks down as a real architecture. There&rsquo;s no way to enforce that a course ID is unique, no way to guarantee a title field isn&rsquo;t empty, and no way to query the data without loading the entire file into memory. File input was also read and stored without any sanitization, leaving the program exposed to malformed or malicious data.</p>
+  </section>
+
+  <section class="block">
+    <h2>What Changed</h2>
+    <p>The script defines a formal schema with a primary key and a required title field, then imports the existing CSV using parameterized queries throughout.</p>
+
+    <pre class="code-block"><span class="c"># course_planner.py — schema definition</span>
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS Courses (
+        courseID      TEXT PRIMARY KEY,
+        title         TEXT NOT NULL,
+        prerequisites TEXT
+    )
+""")
+
+<span class="c"># Parameterized insert — prevents SQL injection</span>
+cursor.execute(
+    "INSERT OR IGNORE INTO Courses (courseID, title, prerequisites) VALUES (?, ?, ?)",
+    (course_id, title, prerequisites)
+)</pre>
+
+    <p>The <code>?</code> placeholders ensure that data is always passed as a bound parameter rather than concatenated into the SQL string, which is the standard defense against SQL injection. <code>INSERT OR IGNORE</code> enforces the primary key constraint automatically &mdash; duplicate course IDs are skipped without crashing the program. Sorting and lookup are now handled by the database itself through <code>ORDER BY</code> and parameterized <code>WHERE</code> clauses, rather than custom logic in the application.</p>
+  </section>
+
+  <section class="block">
+    <h2>Course Outcomes</h2>
+    <p><strong>Outcome 4</strong>, applying well-founded and innovative techniques, is demonstrated by using Python&rsquo;s standard-library <code>sqlite3</code> module to deliver structured storage and querying with no external dependencies. <strong>Outcome 5</strong>, developing a security mindset, is demonstrated throughout &mdash; parameterized queries, schema-level constraints, and row validation before insertion together ensure malformed or malicious data never reaches the database.</p>
+  </section>
+
+  <section class="block">
+    <h2>Reflection</h2>
+    <p>This enhancement clarified what a database actually provides beyond storage. The primary key constraint meant I never had to write duplicate-detection logic by hand &mdash; the database enforces it. The <code>ORDER BY</code> clause meant I never had to sort in application code &mdash; the database handles that too. Offloading those concerns to the database layer isn&rsquo;t just cleaner code, it&rsquo;s a fundamentally more reliable architecture, and one I expect to lean on heavily in healthcare analytics work.</p>
+  </section>
+
+  <div class="btn-row">
+    <a class="btn primary" href="assets/files/CoursePlanner_Enhancement_Three.zip">Download Enhanced Code</a>
+    <a class="btn" href="assets/files/CoursePlanner-CS300_Original.cpp">View Original Artifact</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Darian Gernand &middot; CS-499 Computer Science Capstone, SNHU</p>
+    <p><a href="https://github.com/" target="_blank" rel="noopener">View on GitHub &rarr;</a></p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
