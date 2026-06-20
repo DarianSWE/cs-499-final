@@ -41,7 +41,7 @@
 
   <section class="block">
     <h2>The Artifact</h2>
-    <p>This enhancement builds on the same CoursePlanner application refactored in Category One, focusing specifically on the hash table at its core. The hash table uses separate chaining for collision resolution &mdash; each bucket is a vector of <code>Course</code> objects &mdash; so the performance of every insert and search depends directly on how evenly the hash function distributes course IDs across the table.</p>
+    <p>This enhancement builds on the same CoursePlanner application refactored in Category One, focusing specifically on the hash table at its core. The hash table uses separate chaining for collision resolution, each bucket is a vector of <code>Course</code> objects, so the performance of every insert and search depends directly on how evenly the hash function distributes course IDs across the table.</p>
   </section>
 
   <section class="block">
@@ -62,7 +62,7 @@ unsigned long HashMap::hash(const string&amp; key) const {
     return hashValue % TABLE_SIZE;
 }</pre>
 
-    <p>The expression <code>(hash &lt;&lt; 5) + hash</code> is equivalent to multiplying the running hash by 33 before adding each character &mdash; weighting each character&rsquo;s contribution by its position. The seed value of 5381 is a prime chosen empirically for its distribution properties. The return type was also updated from <code>int</code> to <code>unsigned long</code> to safely accommodate the larger intermediate values produced during computation.</p>
+    <p>The expression <code>(hash &lt;&lt; 5) + hash</code> is equivalent to multiplying the running hash by 33 before adding each character, weighting each character&rsquo;s contribution by its position. The seed value of 5381 is a prime chosen empirically for its distribution properties. The return type was also updated from <code>int</code> to <code>unsigned long</code> to safely accommodate the larger intermediate values produced during computation.</p>
   </section>
 
   <section class="block">
@@ -72,7 +72,7 @@ unsigned long HashMap::hash(const string&amp; key) const {
 
   <section class="block">
     <h2>Reflection</h2>
-    <p>The most valuable part of this enhancement was developing a concrete understanding of why hash function design matters beyond producing a valid index. Seeing exactly how CS100 and CS200 land in adjacent buckets under summation made the performance argument for DJB2 tangible rather than theoretical &mdash; the kind of data-driven reasoning I expect to use regularly in analytics work.</p>
+    <p>The most valuable part of this enhancement was developing a concrete understanding of why hash function design matters beyond producing a valid index. Seeing exactly how CS100 and CS200 land in adjacent buckets under summation made the performance argument for DJB2 tangible rather than theoretical, the kind of data-driven reasoning I expect to use regularly in analytics work.</p>
   </section>
 
   <div class="btn-row">
