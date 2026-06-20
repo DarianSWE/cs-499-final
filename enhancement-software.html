@@ -46,7 +46,7 @@
 
   <section class="block">
     <h2>Why This Enhancement</h2>
-    <p>The original code had no real defense against failure. Invalid menu input caused a silent stream failure and an infinite loop. CSV rows were inserted without validation, so a malformed or empty line could corrupt the dataset silently. Print and search options could execute before any data was loaded, and nothing prevented a duplicate course ID from being inserted twice. None of these were edge cases &mdash; they were everyday user mistakes the original program had no way to handle gracefully.</p>
+    <p>The original code had no real defense against failure. Invalid menu input caused a silent stream failure and an infinite loop. CSV rows were inserted without validation, so a malformed or empty line could corrupt the dataset silently. Print and search options could execute before any data was loaded, and nothing prevented a duplicate course ID from being inserted twice. None of these were edge cases, they were everyday user mistakes the original program had no way to handle gracefully.</p>
   </section>
 
   <section class="block">
@@ -62,12 +62,12 @@ if (!(cin &gt;&gt; choice)) {
     continue;
 }</pre>
 
-    <p>CSV rows are now validated before insertion &mdash; checked for a minimum field count, a non-empty course ID, and trimmed of stray whitespace &mdash; and the <code>HashMap::insert()</code> method rejects duplicate course IDs at the data layer rather than relying on the caller to check first.</p>
+    <p>CSV rows are now validated before insertion, checked for a minimum field count, a non-empty course ID, and trimmed of stray whitespace and the <code>HashMap::insert()</code> method rejects duplicate course IDs at the data layer rather than relying on the caller to check first.</p>
   </section>
 
   <section class="block">
     <h2>Course Outcomes</h2>
-    <p>The modular refactor demonstrates <strong>Outcome 1</strong>, building collaborative environments through maintainable code: separating logic into clearly scoped files with documented public interfaces is exactly the structure a team can divide and contribute to without conflict. The validation work demonstrates <strong>Outcome 5</strong>, a security mindset that anticipates failure: every fix here targets a real vulnerability &mdash; stream corruption, malformed input, premature data access, and duplicate insertion &mdash; rather than a hypothetical one.</p>
+    <p>The modular refactor demonstrates <strong>Outcome 1</strong>, building collaborative environments through maintainable code: separating logic into clearly scoped files with documented public interfaces is exactly the structure a team can divide and contribute to without conflict. The validation work demonstrates <strong>Outcome 5</strong>, a security mindset that anticipates failure: every fix here targets a real vulnerability, stream corruption, malformed input, premature data access, and duplicate insertion, rather than a hypothetical one.</p>
   </section>
 
   <section class="block">
