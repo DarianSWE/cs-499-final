@@ -68,17 +68,17 @@ cursor.execute(
     (course_id, title, prerequisites)
 )</pre>
 
-    <p>The <code>?</code> placeholders ensure that data is always passed as a bound parameter rather than concatenated into the SQL string, which is the standard defense against SQL injection. <code>INSERT OR IGNORE</code> enforces the primary key constraint automatically &mdash; duplicate course IDs are skipped without crashing the program. Sorting and lookup are now handled by the database itself through <code>ORDER BY</code> and parameterized <code>WHERE</code> clauses, rather than custom logic in the application.</p>
+    <p>The <code>?</code> placeholders ensure that data is always passed as a bound parameter rather than concatenated into the SQL string, which is the standard defense against SQL injection. <code>INSERT OR IGNORE</code> enforces the primary key constraint automatically, duplicate course IDs are skipped without crashing the program. Sorting and lookup are now handled by the database itself through <code>ORDER BY</code> and parameterized <code>WHERE</code> clauses, rather than custom logic in the application.</p>
   </section>
 
   <section class="block">
     <h2>Course Outcomes</h2>
-    <p><strong>Outcome 4</strong>, applying well-founded and innovative techniques, is demonstrated by using Python&rsquo;s standard-library <code>sqlite3</code> module to deliver structured storage and querying with no external dependencies. <strong>Outcome 5</strong>, developing a security mindset, is demonstrated throughout &mdash; parameterized queries, schema-level constraints, and row validation before insertion together ensure malformed or malicious data never reaches the database.</p>
+    <p><strong>Outcome 4</strong>, applying well-founded and innovative techniques, is demonstrated by using Python&rsquo;s standard-library <code>sqlite3</code> module to deliver structured storage and querying with no external dependencies. <strong>Outcome 5</strong>, developing a security mindset, is demonstrated throughout, parameterized queries, schema-level constraints, and row validation before insertion together ensure malformed or malicious data never reaches the database.</p>
   </section>
 
   <section class="block">
     <h2>Reflection</h2>
-    <p>This enhancement clarified what a database actually provides beyond storage. The primary key constraint meant I never had to write duplicate-detection logic by hand &mdash; the database enforces it. The <code>ORDER BY</code> clause meant I never had to sort in application code &mdash; the database handles that too. Offloading those concerns to the database layer isn&rsquo;t just cleaner code, it&rsquo;s a fundamentally more reliable architecture, and one I expect to lean on heavily in healthcare analytics work.</p>
+    <p>This enhancement clarified what a database actually provides beyond storage. The primary key constraint meant I never had to write duplicate-detection logic by hand, the database enforces it. The <code>ORDER BY</code> clause meant I never had to sort in application code, the database handles that too. Offloading those concerns to the database layer isn&rsquo;t just cleaner code, it&rsquo;s a fundamentally more reliable architecture, and one I expect to lean on heavily in healthcare analytics work.</p>
   </section>
 
   <div class="btn-row">
